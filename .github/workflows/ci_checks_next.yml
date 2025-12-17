@@ -1,7 +1,7 @@
 name: PR checks (filtrado por rama)
 
 on:
-  workflow_dispatch: {}                # permite ejecutar manualmente desde Actions -> Run workflow
+  workflow_dispatch: {} # permite ejecutar manualmente desde Actions -> Run workflow
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     branches:
