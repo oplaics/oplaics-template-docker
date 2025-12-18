@@ -25,8 +25,10 @@ Ejemplo: `[feat]: agregar endpoint para autenticación`
 ## Requisitos obligatorios
 - Asignar el label correspondiente al tipo del PR. Sin label no será aprobado.
 - Referenciar issues relacionados en la descripción para que se cierren automáticamente al hacer merge (usar `Closes #123`, `Fixes #123`, `Resolves #123`).
+- No abrir PRs directamente a `main` si los cambios no han pasado por `next`. Cualquier excepción debe ser aprobada explícitamente por el equipo de liberación.
 
 ## Regla especial: merges de next a main
+- Flujo obligatorio: primero merge a `next`, luego a `main`. Está prohibido promover un cambio a `main` sin haberlo integrado previamente en `next`.
 - Los PR que vayan desde la rama `next` hacia `main` deben llevar el label `skip-changelog`.
 - El título de esos PR debe ser exactamente: `Merge to main release`
 - Estas PRs no siguen el formato `[type]: ...` en el título (salvo indicación adicional del equipo).
@@ -36,6 +38,7 @@ Ejemplo: `[feat]: agregar endpoint para autenticación`
 - [ ] Label correspondiente asignado (para `next -> main` añadir `skip-changelog`)
 - [ ] Descripción clara de los cambios
 - [ ] Issues referenciados con keyword de cierre (ej. `Closes #123`)
+- [ ] Confirmado que el cambio ya pasó por `next` antes de abrir PR a `main`
 - [ ] Tests relevantes agregados/actualizados
 - [ ] Documentación actualizada si aplica
 
@@ -60,4 +63,4 @@ Descripción mínima:
   2. Verificar que la API responde 201
 - Issues: `Closes #42`
 
-Cumplir estas reglas garantiza una revisión más rápida y merges consistentes.
+Cumplir estas reglas garantiza una revisión más rápida y merges consistentes. Recuerda: ningún cambio debe llegar a `main` sin haber pasado por `next` primero.
