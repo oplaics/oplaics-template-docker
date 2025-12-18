@@ -28,7 +28,7 @@ jobs:
 
       - name: Instalar dependencias
         working-directory: ./frontend
-        run: npm install
+        run: npm ci
 
       - name: Construir proyecto Vite
         working-directory: ./frontend
