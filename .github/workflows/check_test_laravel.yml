@@ -23,10 +23,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
-
-      - name: Copy .env
-        working-directory: ./backend
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
           
       - name: Instalar dependencias
         working-directory: ./backend
@@ -34,7 +30,7 @@ jobs:
 
       - name: Preparar entorno
         run: |
-          cp .env.example .env || true
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
           php artisan key:generate
 
       - name: Crear base de datos SQLite
