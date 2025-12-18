@@ -1,0 +1,30 @@
+name: Quick PR checks PHP
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - next
+
+permissions:
+  contents: read
+
+jobs:
+  quick-checks:
+    name: Quick checks (rápidos)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+
+      - name: PHP syntax check
+        run: |
+          find . -name "*.php" -not -path "./vendor/*" -print0 | xargs -0 -n1 php -l
+
+      - name: Composer validate
+        run: composer validate --no-check-publish || true
