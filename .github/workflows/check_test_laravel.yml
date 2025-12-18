@@ -25,11 +25,11 @@ jobs:
           php-version: 8.4
 
       - name: Copy .env
-        working-directory: ./laravel
+        working-directory: ./backend
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
           
       - name: Instalar dependencias
-        working-directory: ./laravel
+        working-directory: ./backend
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Preparar entorno
@@ -38,17 +38,17 @@ jobs:
           php artisan key:generate
 
       - name: Crear base de datos SQLite
-        working-directory: ./laravel
+        working-directory: ./backend
         run: |
           mkdir -p database
           touch database/database.sqlite
       
       - name: Link storage
-        working-directory: ./laravel
+        working-directory: ./backend
         run: php artisan storage:link
 
       - name: Ejecutar pruebas con php artisan test
-        working-directory: ./laravel
+        working-directory: ./backend
         env:
           DB_DATABASE: database/database.sqlite
         run: php artisan test
