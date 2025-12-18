@@ -1,11 +1,10 @@
-name: PR checks (filtrado por rama)
+name: Test Laravel PHP
 
 on:
-  workflow_dispatch: {} # permite ejecutar manualmente desde Actions -> Run workflow
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     branches:
-      - next
+      - main
 
   pull_request_review:
     types: [submitted]
@@ -16,7 +15,7 @@ permissions:
 jobs:
   php-tests-full:
     name: Ejecutar php artisan test
-    if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'next' }}
+    if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
     runs-on: ubuntu-latest
     env:
       DB_CONNECTION: sqlite
@@ -57,27 +56,3 @@ jobs:
         env:
           DB_DATABASE: database/database.sqlite
         run: php artisan test
-
-  frontend-build-full:
-    name: Construir proyecto frontend con Vite
-    if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'next' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          working-directory: ./frontend
-
-      - name: Instalar dependencias
-        working-directory: ./frontend
-        run: npm install
-
-      - name: Construir proyecto Vite
-        working-directory: ./frontend
-        run: npm run build
-        # env: 
-        #   VITE_REVERB_APP_KEY: ${{ secrets.ENV_REVERB_KEY }}
-        #   VITE_VERSION_APP: ${{ github.ref_name }}
