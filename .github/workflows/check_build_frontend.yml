@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     branches:
-      - next
+      - main
 
   pull_request_review:
     types: [submitted]
@@ -15,7 +15,7 @@ permissions:
 jobs:
   frontend-build-full:
     name: Construir proyecto frontend con Vite
-    if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'next' }}
+    if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
