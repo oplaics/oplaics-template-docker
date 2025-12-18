@@ -1,0 +1,52 @@
+# Archivo: .github/release.yml
+# ----------------------------------------------------
+
+changelog:
+  # Excluir PRs que solo sean para documentación o mantenimiento menor
+  exclude:
+    labels:
+      - skip-changelog
+  
+  # Definir categorías personalizadas para el changelog en español
+  categories:
+    - title: 📝 Documentación
+      labels:
+        - "type: docs"
+
+    - title: 💥 Cambios Incompatibles (Breaking Changes)
+      labels:
+        - "type: breaking"
+
+    - title: ✨ Nuevas Funcionalidades
+      labels:
+        - "type: feat"
+
+    - title: 🔄 Cambios y Mejoras
+      labels:
+        - "type: change"
+
+    - title: 🐛 Correcciones de Bugs
+      labels:
+        - "type: fix"
+
+    - title: ⚡ Rendimiento
+      labels:
+        - "type: perf"
+
+    - title: 🧪 Tests & CI
+      labels:
+        - "type: test"
+        - "type: ci"
+
+    - title: 🔧 Mantenimiento y Dependencias
+      labels:
+        - "type: chore"
+        - "type: deps"
+
+    - title: 🔒 Seguridad
+      labels:
+        - "type: security"
+        
+    - title: Otros Cambios y Mejoras
+      labels:
+        - "*" # Excluir todas las etiquetas anteriores

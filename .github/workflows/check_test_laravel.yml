@@ -1,0 +1,58 @@
+name: Test Laravel PHP
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches:
+      - main
+
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: read
+
+jobs:
+  php-tests-full:
+    name: Ejecutar php artisan test
+    if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
+    runs-on: ubuntu-latest
+    env:
+      DB_CONNECTION: sqlite
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+
+      - name: Copy .env
+        working-directory: ./laravel
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+          
+      - name: Instalar dependencias
+        working-directory: ./laravel
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Preparar entorno
+        run: |
+          cp .env.example .env || true
+          php artisan key:generate
+
+      - name: Crear base de datos SQLite
+        working-directory: ./laravel
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+      
+      - name: Link storage
+        working-directory: ./laravel
+        run: php artisan storage:link
+
+      - name: Ejecutar pruebas con php artisan test
+        working-directory: ./laravel
+        env:
+          DB_DATABASE: database/database.sqlite
+        run: php artisan test
