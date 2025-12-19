@@ -41,7 +41,6 @@ changelog:
     - title: 🔧 Mantenimiento y Dependencias
       labels:
         - "type: chore"
-        - "type: deps"
 
     - title: 🔒 Seguridad
       labels:
