@@ -11,7 +11,7 @@ Ejemplo: `[feat]: agregar endpoint para autenticación`
 
 | Tipo | Descripción |
 |---|---|
-| `breaking` | Cambios incompatibles |
+| `breaking` | Cambios incompatibles que rompen la compatibilidad hacia atrás (requieren incrementar la versión mayor y proporcionar notas/migración claras) |
 | `chore` | Mantenimiento y cambios generales (usar `chore(deps)` para actualizaciones de dependencias) |
 | `ci` | Integración continua / pipelines |
 | `docs` | Documentación |
