@@ -12,7 +12,7 @@ type(scope): breve descripción
 ## Tipos recomendados
 - `feat` — Nueva funcionalidad  
 - `fix` — Corrección de bug  
-- `chore` — Mantenimiento (usar `chore(deps)` para dependencias)  
+- `chore` — Mantenimiento y cambios generales (usar `chore(deps)` para dependencias)  
 - `ci` — Cambios en pipelines / workflows  
 - `docs` — Documentación  
 - `test` — Tests / infra de tests  
