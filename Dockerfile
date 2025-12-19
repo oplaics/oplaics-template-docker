@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 # Install Node.js and system dependencies in a single RUN command to reduce layers
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \

@@ -21,9 +21,9 @@ changelog:
       labels:
         - "type: feat"
 
-    - title: 🔄 Cambios y Mejoras
+    - title: 🔧 Cambios y Mejoras
       labels:
-        - "type: change"
+        - "type: chore"
 
     - title: 🐛 Correcciones de Bugs
       labels:
@@ -37,11 +37,6 @@ changelog:
       labels:
         - "type: test"
         - "type: ci"
-
-    - title: 🔧 Mantenimiento y Dependencias
-      labels:
-        - "type: chore"
-        - "type: deps"
 
     - title: 🔒 Seguridad
       labels:

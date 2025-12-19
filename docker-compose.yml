@@ -13,7 +13,7 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
 
   db:
-    image: mysql:5.7.33
+    image: mysql:8.0.43
     restart: unless-stopped
     env_file:
       - .env
@@ -24,6 +24,11 @@ services:
       - app-network
     volumes:
       - ./docker/dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   adminer:
     image: adminer
@@ -38,26 +43,36 @@ services:
     networks:
       - app-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+        restart: true
 
   php:
     build: .
-    image: jojo-8.3
+    image: jojo-8.4
     restart: unless-stopped
     networks:
       - app-network
     volumes:
       - ./backend:/var/www
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
   
   schedule:
     build: .
-    image: jojo-8.3
+    image: jojo-8.4
     restart: unless-stopped
     user: www-data
     networks:
       - app-network
     volumes:
       - ./backend:/var/www
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
     command: 
       - /bin/sh
       - -c
