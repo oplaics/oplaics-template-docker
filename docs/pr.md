@@ -8,11 +8,11 @@ El título debe seguir exactamente:
 Ejemplo: `[feat]: agregar endpoint para autenticación`
 
 ## Tipos permitidos
+
 | Tipo | Descripción |
 |---|---|
 | `breaking` | Cambios incompatibles |
-| `change` | Cambios o mejoras generales |
-| `chore` | Mantenimiento (usar `chore(deps)` para actualizaciones de dependencias) |
+| `chore` | Mantenimiento y cambios generales (usar `chore(deps)` para actualizaciones de dependencias) |
 | `ci` | Integración continua / pipelines |
 | `deps` | Actualización de dependencias |
 | `docs` | Documentación |
