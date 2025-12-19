@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import { exec } from "child_process";
 import react from "@vitejs/plugin-react-swc";
-import eslintPlugin from "vite-plugin-eslint";
+import eslintPlugin from "@nabla/vite-plugin-eslint";
 import mkcert from "vite-plugin-mkcert";
 
 // https://vite.dev/config/
@@ -19,13 +19,9 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    eslintPlugin(),
     mkcert({
       savePath: "../backend/certs", // save the generated certificate into certs directory
-    }),
-    eslintPlugin({
-      cache: false,
-      include: ["./src/**/*.js", "./src/**/*.jsx"],
-      exclude: [],
     }),
     {
       name: "move-index-html",
