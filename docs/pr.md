@@ -14,7 +14,6 @@ Ejemplo: `[feat]: agregar endpoint para autenticación`
 | `breaking` | Cambios incompatibles |
 | `chore` | Mantenimiento y cambios generales (usar `chore(deps)` para actualizaciones de dependencias) |
 | `ci` | Integración continua / pipelines |
-| `deps` | Actualización de dependencias |
 | `docs` | Documentación |
 | `feat` | Nueva funcionalidad |
 | `fix` | Corrección de errores |
