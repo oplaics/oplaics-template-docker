@@ -1,5 +1,11 @@
 FROM php:8.4-fpm
 
+# Set user and group to match host user
+ARG HOST_UID=1000
+ARG HOST_GID=1000
+RUN groupadd -g ${HOST_GID} hostgroup || true \
+ && useradd -u ${HOST_UID} -g ${HOST_GID} -m hostuser || true
+
 # Install Node.js and system dependencies in a single RUN command to reduce layers
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
   && apt-get update \

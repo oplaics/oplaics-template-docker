@@ -51,6 +51,7 @@ services:
     build: .
     image: jojo-8.4
     restart: unless-stopped
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     networks:
       - app-network
     volumes:
@@ -64,7 +65,7 @@ services:
     build: .
     image: jojo-8.4
     restart: unless-stopped
-    user: www-data
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     networks:
       - app-network
     volumes:
