@@ -49,7 +49,7 @@ services:
 
   php:
     build: .
-    image: jojo-8.4
+    image: jojo-8.4.1
     restart: unless-stopped
     user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     networks:
@@ -63,7 +63,7 @@ services:
   
   schedule:
     build: .
-    image: jojo-8.4
+    image: jojo-8.4.1
     restart: unless-stopped
     user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     networks:
