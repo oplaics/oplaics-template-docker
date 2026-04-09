@@ -1,6 +1,11 @@
 import { defineConfig } from "vite";
 import { exec } from "child_process";
-import react from "@vitejs/plugin-react-swc";
+
+/**
+ * Plugins
+ */
+import babel from "@rolldown/plugin-babel";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import eslintPlugin from "@nabla/vite-plugin-eslint";
 import mkcert from "vite-plugin-mkcert";
 
@@ -19,6 +24,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    babel({ presets: [reactCompilerPreset()] }),
     eslintPlugin(),
     mkcert({
       savePath: "../backend/certs", // save the generated certificate into certs directory
