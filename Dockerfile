@@ -11,6 +11,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
   && apt-get update \
   && apt-get install -y \
   nodejs \
+  ffmpeg \
   chromium \
   libzip-dev \
   libpng-dev \
@@ -22,25 +23,20 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
 # Nos movemos a /var/www/
 WORKDIR /var/www/
 
-# Install PHP extensions
+# Install PHP extensions and clean caches
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-  && docker-php-ext-install -j$(nproc) gd \
-  bcmath \
-  mysqli \
-  pdo_mysql \
-  zip \
-  pcntl
+  && docker-php-ext-install -j$(nproc) \
+    gd \
+    bcmath \
+    mysqli \
+    pdo_mysql \
+    zip \
+    pcntl \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/* /tmp/* /var/tmp/* /usr/src/php*
 
 # Instalar composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Exponemos el puerto 9000 a la network
 EXPOSE 9000
-
-# Add cron job
-RUN echo "* * * * * cd /app && /usr/local/bin/php artisan schedule:run >> /dev/null 2>&1" >> /etc/cron.d/artisan-schedule
-
-# Set PHP configurations
-RUN echo 'memory_limit = 2048M' > /usr/local/etc/php/conf.d/docker-php-memlimit.ini \
-  && echo 'post_max_size = 20M' > /usr/local/etc/php/conf.d/docker-php-post_max.ini \
-  && echo 'upload_max_filesize = 20M' > /usr/local/etc/php/conf.d/docker-php-upload_max.ini
