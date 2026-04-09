@@ -1,5 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { useThemeConfig } from "./hooks/utils/useThemeConfig";
+import Router from "./Router";
 
 export default function App() {
   const themeConfig = useThemeConfig();
@@ -8,7 +9,7 @@ export default function App() {
     <ThemeProvider theme={themeConfig}>
       <CssBaseline />
       <span id="top-anchor" />
-      xd
+      <Router />
     </ThemeProvider>
   )
 }
