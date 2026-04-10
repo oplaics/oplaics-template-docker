@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutApp } from "../../store/authReducer";
 import CloseButton from "../../components/notiferCustom/CloseButton";
-import { resetNotistack } from "../../store/notiReducer";
+import { resetNotifier } from "../../store/reducers/app/notifierReducer";
 
 export default function useNotifier({
   messageTo200 = true,
@@ -97,7 +97,7 @@ export default function useNotifier({
     }
 
     return () => {
-      dispatch(resetNotistack());
+      dispatch(resetNotifier());
     }
   }, [
     notiKey,
