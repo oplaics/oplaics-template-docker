@@ -47,4 +47,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relaciones
+     */
+    public function securityCodes()
+    {
+        return $this->hasMany(Auth\SecurityCode::class);
+    }
 }
