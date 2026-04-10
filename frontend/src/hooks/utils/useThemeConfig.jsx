@@ -30,11 +30,11 @@ export const useThemeConfig = () => {
     }
 
     window.addEventListener("storage", onStorage);
-    window.addEventListener("leoEmails.customEvent.changeTheme", onCustom);
+    window.addEventListener("template.customEvent.changeTheme", onCustom);
 
     return () => {
       window.removeEventListener("storage", onStorage);
-      window.removeEventListener("leoEmails.customEvent.changeTheme", onCustom);
+      window.removeEventListener("template.customEvent.changeTheme", onCustom);
     };
   }, []);
 
