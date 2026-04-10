@@ -22,7 +22,6 @@ class AuthService
       'permissions' => $this->formatPerm($user),
       'roles' => $this->roles($user),
       'unreads' => $user->unreadNotifications->count(),
-      'webpush_server' => env('VAPID_PUBLIC_KEY'),
     ];
 
     if ($token) $response['apiKey'] = $token;
