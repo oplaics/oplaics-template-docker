@@ -1,10 +1,19 @@
+/**
+ * React
+ */
 import { useEffect } from "react";
 
+/**
+ * Notistack
+ */
 import { useSnackbar } from "notistack";
+import CloseButton from "../../components/notiferCustom/CloseButton";
 
+/**
+ * Redux
+ */
 import { useDispatch, useSelector } from "react-redux";
 import { logoutApp } from "../../store/authReducer";
-import CloseButton from "../../components/notiferCustom/CloseButton";
 import { resetNotifier } from "../../store/reducers/app/notifierReducer";
 
 export default function useNotifier({
