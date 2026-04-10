@@ -6,7 +6,6 @@ use App\Mail\Auth\TfaCodeMail;
 use App\Models\Auth\SecurityCode;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use Laravel\Sanctum\NewAccessToken;
 
 class AuthService
 {
