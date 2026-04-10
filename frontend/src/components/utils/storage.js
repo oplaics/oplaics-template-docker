@@ -1,4 +1,4 @@
-const STORAGE_PREFIX = ".";
+const STORAGE_PREFIX = "leoEmails.";
 
 export function readLocal(key, fallback) {
   try {
