@@ -4,6 +4,11 @@
 import { Outlet } from "react-router-dom";
 
 /**
+ * Notistack
+ */
+import { SnackbarProvider } from "notistack";
+
+/**
  * Redux
  */
 import { Provider } from "react-redux";
@@ -16,7 +21,15 @@ function DefaultLayoutWrapper() {
 export default function DefaultLayout() {
   return (
     <Provider store={store}>
-      <DefaultLayoutWrapper />
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <DefaultLayoutWrapper />
+      </SnackbarProvider>
     </Provider>
   );
 }
