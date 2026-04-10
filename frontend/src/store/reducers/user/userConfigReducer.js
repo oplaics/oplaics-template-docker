@@ -18,7 +18,7 @@ export const userConfigSlice = createSlice({
       const newTheme = state.theme === 'light' ? 'dark' : 'light';
       state.theme = newTheme;
       writeLocal('userConfig.theme', newTheme);
-      window.dispatchEvent(new CustomEvent("leoEmails.customEvent.changeTheme", { detail: { newTheme } }));
+      window.dispatchEvent(new CustomEvent("template.customEvent.changeTheme", { detail: { newTheme } }));
     }
   },
 });
