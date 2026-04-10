@@ -17,12 +17,15 @@ uses(RefreshDatabase::class);
 
 test('Login via credenciales', function () {
     // $this->withoutExceptionHandling();
+    $user = User::factory()->create([
+        'password' => 'testing',
+    ]);
 
     Mail::fake();
 
     $response = $this->postJson(route('auth.login'), [
-        'email' => 'admin@example.com',
-        'password' => 'password',
+        'email' => $user->email,
+        'password' => 'testing',
     ]);
 
     $response->assertStatus(200)
@@ -35,7 +38,6 @@ test('Login via credenciales', function () {
             'permissions',
             'roles',
             'unreads',
-            'webpush_server',
         ]);
 
     Mail::assertQueued(TfaCodeMail::class, 1);
