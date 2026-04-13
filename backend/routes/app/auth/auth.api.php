@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 
+Route::post('/register', [AuthController::class, 'createAccount'])
+  ->name('auth.register');
+
 Route::post('/login', [AuthController::class, 'login'])
   ->name('auth.login');
 
