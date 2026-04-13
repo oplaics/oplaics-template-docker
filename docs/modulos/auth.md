@@ -31,6 +31,7 @@ Este módulo se encarga de gestionar la autenticación de usuarios y la autoriza
 - **Servicio**: [SecurityCodeService](/backend/app/Services/Auth/SecurityCodeService.php)
 - **Requests**:
   - [UpdatePasswordRequest](/backend/app/Http/Requests/Auth/UpdatePasswordRequest.php)
+  - [SendCodeRequest](/backend/app/Http/Requests/Auth/SendCodeRequest.php)
 - **Excepciones**: _N/A_
 - **Rutas**: [security_code.api.php](/backend/routes/app/auth/security_code.api.php)
 - **Tests**: 
