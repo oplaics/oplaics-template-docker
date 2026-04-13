@@ -24,7 +24,7 @@ class UpdatePasswordRequest extends FormRequest
         return [
             'email' => 'required|email|exists:users,email',
             'otp' => 'required|string',
-            'new_password' => 'required|string|min:4|confirmed',
+            'new_password' => 'required|string|min:8|confirmed',
         ];
     }
 
