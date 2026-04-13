@@ -1,12 +1,7 @@
 <?php
 
-// Refresh Database
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use App\Models\User;
 use Laravel\Sanctum\Sanctum;
-
-uses(RefreshDatabase::class);
 
 test('[GET] usuario puede cerrar sesión', function () {
     // $this->withoutExceptionHandling();
