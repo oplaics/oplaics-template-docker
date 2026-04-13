@@ -43,13 +43,13 @@ test('[GET] usuario puede cerrar sesión en todos los dispositivos', function ()
 test('[GET] usuario no puede cerrar sesión sin autenticación', function () {
     $response = $this->getJson(route('auth.logout'));
 
-    $response->assertStatus(401);
+    $response->assertUnauthorized();
 });
 
 test('[GET] usuario no puede cerrar sesión en todos los dispositivos sin autenticación', function () {
     $response = $this->getJson(route('auth.logout.all'));
 
-    $response->assertStatus(401);
+    $response->assertUnauthorized();
 });
 
 test('[GET] usuario no puede cerrar sesión con token inválido', function () {
@@ -57,5 +57,5 @@ test('[GET] usuario no puede cerrar sesión con token inválido', function () {
         'Authorization' => 'Bearer invalid_token',
     ])->getJson(route('auth.logout'));
 
-    $response->assertStatus(401);
+    $response->assertUnauthorized();
 });
