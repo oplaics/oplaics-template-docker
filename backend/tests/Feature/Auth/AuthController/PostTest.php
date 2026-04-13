@@ -33,7 +33,6 @@ test('[POST] usuario puede crear una cuenta', function () {
     $this->assertDatabaseHas('users', [
         'email' => 'testing@testing.com',
     ]);
-    dd(User::count());
 });
 
 test('[POST] usuario no puede crear una cuenta con datos inválidos', function () {
