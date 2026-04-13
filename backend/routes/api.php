@@ -15,9 +15,9 @@ Route::prefix('v1')->group(function () {
      */
     require __DIR__ . '/app/auth/auth.api.php';
 
-    // /**
-    //  * Security Code API
-    //  */
-    // require __DIR__ . '/osys/Auth/security_code.api.php';
+    /**
+     * Security Code API
+     */
+    require __DIR__ . '/osys/Auth/security_code.api.php';
   });
 });
