@@ -15,6 +15,44 @@ use Illuminate\Support\Facades\Mail;
 
 uses(RefreshDatabase::class);
 
+test('[POST] usuario puede crear una cuenta', function () {
+    $response = $this->postJson(route('auth.register'), [
+        'name' => 'Test User',
+        'email' => 'testing@testing.com',
+        'password' => 'testings',
+        'password_confirmation' => 'testings',
+    ]);
+
+    $response->assertStatus(201)
+        ->assertJsonStructure([
+            'status',
+            'msg',
+            'user' => [
+                'id',
+                'name',
+                'email',
+                'created_at',
+                'updated_at',
+            ],
+        ]);
+
+    $this->assertDatabaseHas('users', [
+        'email' => 'testing@testing.com',
+    ]);
+});
+
+test('[POST] usuario no puede crear una cuenta con datos inválidos', function () {
+    $response = $this->postJson(route('auth.register'), [
+        'name' => '',
+        'email' => 'invalid-email',
+        'password' => 'short',
+        'password_confirmation' => 'short',
+    ]);
+
+    $response->assertStatus(422)
+        ->assertJsonValidationErrors(['name', 'email', 'password']);
+});
+
 test('[POST] usuario puede logearse', function () {
     // $this->withoutExceptionHandling();
     $user = User::factory()->create([
