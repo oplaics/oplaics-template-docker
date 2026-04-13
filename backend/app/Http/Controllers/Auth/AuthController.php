@@ -16,6 +16,25 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function createAccount(
+        Request $request,
+        AuthService $authService
+    ): JsonResponse {
+        $validated = $request ->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = $authService->createAccount($validated);
+
+        return response()->json([
+            'status' => 201,
+            'msg' => 'Cuenta creada exitosamente',
+            'user' => $user,
+        ], 201);
+    }
+
     public function login(
         LoginRequest $request,
         AuthService $authService,
@@ -100,7 +119,7 @@ class AuthController extends Controller
         return $authService->sendLoginResponse($user, null, $abilities);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $user = $request->user();
 
@@ -112,7 +131,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function logoutAll(Request $request)
+    public function logoutAll(Request $request): JsonResponse
     {
         $user = $request->user();
 
