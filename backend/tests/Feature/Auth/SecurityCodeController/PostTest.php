@@ -1,14 +1,11 @@
 <?php
 
 use App\Mail\Auth\SecurityCodeMail;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\Auth\SecurityCode;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
-
-uses(RefreshDatabase::class);
 
 test('[POST] usuario puede enviar código de recuperación', function () {
     // $this->withoutExceptionHandling();
