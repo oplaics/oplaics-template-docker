@@ -18,10 +18,10 @@ Route::post('/relogin', [AuthController::class, 'relogin'])
   ->middleware('auth:sanctum')
   ->name('auth.relogin');
 
-// Route::get('/logout', [AuthController::class, 'logout'])
-//   ->middleware('auth:sanctum')
-//   ->name('auth.logout');
+Route::get('/logout', [AuthController::class, 'logout'])
+  ->middleware('auth:sanctum')
+  ->name('auth.logout');
 
-// Route::get('/logout-all', [AuthController::class, 'logoutAll'])
-//   ->middleware('auth:sanctum')
-//   ->name('auth.logout.all');
+Route::get('/logout-all', [AuthController::class, 'logoutAll'])
+  ->middleware('auth:sanctum')
+  ->name('auth.logout.all');
