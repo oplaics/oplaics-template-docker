@@ -10,6 +10,18 @@ use Spatie\Permission\Models\Role;
 
 class AuthService
 {
+    public function createAccount(array $data): User
+    {
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'email_verified_at' => now(),
+        ]);
+
+        return $user;
+    }
+
     public function sendLoginResponse(User $user, ?string $token = null, ?array $abilities = null)
     {
         $user->makeVisible(['id']);
