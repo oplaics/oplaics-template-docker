@@ -22,14 +22,17 @@ Este módulo se encarga de gestionar la autenticación de usuarios y la autoriza
 - **Rutas**: [auth.api.php](/backend/routes/app/auth/auth.api.php)
 - **Tests**
   - [PostTest](/backend/tests/Feature/Auth/AuthController/PostTest.php)
+  - [GetTest](/backend/tests/Feature/Auth/AuthController/GetTest.php)
 - **Factory**: _N/A_
 
 ### SecurityCode
 - **Modelo**: [SecurityCode](/backend/app/Models/Auth/SecurityCode.php)
-- **Controlador**: _N/A_
-- **Servicio**: _N/A_
-- **Requests**: _N/A_
+- **Controlador**: [SecurityCodeController](/backend/app/Http/Controllers/Auth/SecurityCodeController.php)
+- **Servicio**: [SecurityCodeService](/backend/app/Services/Auth/SecurityCodeService.php)
+- **Requests**:
+  - [UpdatePasswordRequest](/backend/app/Http/Requests/Auth/UpdatePasswordRequest.php)
 - **Excepciones**: _N/A_
-- **Rutas**: _N/
-- **Tests**: _N/A_
+- **Rutas**: [security_code.api.php](/backend/routes/app/auth/security_code.api.php)
+- **Tests**: 
+  - [PostTest](/backend/tests/Feature/Auth/SecurityCodeController/PostTest.php)
 - **Factory**: [SecurityCodeFactory](/backend/database/factories/auth/SecurityCodeFactory.php)
