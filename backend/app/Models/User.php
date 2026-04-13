@@ -33,6 +33,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'email_verified_at',
+        'roles',
+        'permissions',
     ];
 
     /**
@@ -46,5 +51,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relaciones
+     */
+    public function securityCodes()
+    {
+        return $this->hasMany(Auth\SecurityCode::class);
     }
 }
