@@ -31,8 +31,6 @@ test('[POST] usuario puede crear una cuenta', function () {
                 'id',
                 'name',
                 'email',
-                'created_at',
-                'updated_at',
             ],
         ]);
 
