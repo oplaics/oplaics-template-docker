@@ -18,6 +18,6 @@ Route::prefix('v1')->group(function () {
     /**
      * Security Code API
      */
-    require __DIR__ . '/osys/Auth/security_code.api.php';
+    require __DIR__ . '/app/auth/security_code.api.php';
   });
 });
