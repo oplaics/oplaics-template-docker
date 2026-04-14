@@ -22,13 +22,14 @@ export default function useNotifier({
   message400 = false,
   message403 = "No tienes permisos para esta acción",
   messageTo404 = true,
-  message404 = 'Ruta URL no encontrada',
+  message404 = "Ruta URL no encontrada",
   messageTo422 = true,
-  message422 = 'Error al verificar los datos',
+  message422 = "Error al verificar los datos",
 } = {}) {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { notiText, notiStatus, notiVariant, notiKey, notiErrors } = useSelector((state) => state.notistack);
+  const { notiText, notiStatus, notiVariant, notiKey, notiErrors } =
+    useSelector((state) => state.notistack);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function useNotifier({
           variant: "warning",
           action: (key) => <CloseButton id={key} />,
         });
-    }else if (notiStatus == 401) {
+    } else if (notiStatus == 401) {
       enqueueSnackbar("Sesión expirada", {
         variant: "info",
         action: (key) => <CloseButton id={key} />,
@@ -71,22 +72,12 @@ export default function useNotifier({
       });
     } else if (notiStatus == 422) {
       if (messageTo422) {
-        const errorMessages = notiErrors && Object.values(notiErrors).flat();
-        if (errorMessages?.length > 0) {
-          errorMessages.forEach((msg) =>
-            enqueueSnackbar(msg, {
-              variant: "error",
-              action: (key) => <CloseButton id={key} />,
-            })
-          );
-        } else {
-          enqueueSnackbar(message422, {
-            variant: "error",
-            action: (key) => <CloseButton id={key} />,
-          });
-        }
+        enqueueSnackbar(message422, {
+          variant: "error",
+          action: (key) => <CloseButton id={key} />,
+        });
       }
-    }else if (notiStatus == 429) {
+    } else if (notiStatus == 429) {
       enqueueSnackbar("Demasiadas peticiones", {
         variant: "info",
         action: (key) => <CloseButton id={key} />,
@@ -107,7 +98,7 @@ export default function useNotifier({
 
     return () => {
       dispatch(resetNotifier());
-    }
+    };
   }, [
     notiKey,
     notiText,
