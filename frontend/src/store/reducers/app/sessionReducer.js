@@ -21,13 +21,13 @@ export const sessionSlice = createSlice({
       state[key] = value;
       !notSave && writeLocal(`session.${key}`, value);
     },
-    logoutApp: () => {
+    logoutSession: () => {
       removeStorage('session.apiKey');
       return {...initialState, relogin: false};
     },
   },
 });
 
-export const { updateSession } = sessionSlice.actions;
+export const { updateSession, logoutSession } = sessionSlice.actions;
 
 export default sessionSlice.reducer;
