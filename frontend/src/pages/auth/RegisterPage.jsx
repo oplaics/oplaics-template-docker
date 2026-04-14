@@ -4,7 +4,7 @@ import ContainerUI from "../../components/ui/ContainerUI";
 export default function RegisterPage() {
   return (
     <ContainerUI full>
-      LoginPage
+      RegisterPage
 
       <br/>
       <NavLink to="/auth">Ir a login</NavLink>
