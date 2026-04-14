@@ -13,19 +13,22 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
+        $owner = User::firstOrCreate(
             ['email' => 'owner@example.com'],
             ['name' => 'Owner', 'password' => 'password']
         );
+        $owner->assignRole('owner');
 
-        User::firstOrCreate(
+        $admin = User::firstOrCreate(
             ['email' => 'admin@example.com'],
             ['name' => 'Admin', 'password' => 'password']
         );
+        $admin->assignRole('admin');
 
-        User::firstOrCreate(
+        $user = User::firstOrCreate(
             ['email' => 'user@example.com'],
             ['name' => 'User', 'password' => 'password']
         );
+        $user->assignRole('user');
     }
 }
