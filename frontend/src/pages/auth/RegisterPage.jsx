@@ -11,6 +11,7 @@ import { Button, Grid } from "@mui/material";
 /**
  * React Hook Form
  */
+import useNotifier from "../../hooks/utils/useNotifier";
 import { FormProvider, useForm } from "react-hook-form";
 
 /**
@@ -19,10 +20,16 @@ import { FormProvider, useForm } from "react-hook-form";
 import ContainerUI from "../../components/ui/ContainerUI";
 import { InputPasswordHook } from "../../components/forms/Inputs/InputPasswordHook";
 import { InputHook } from "../../components/forms/Inputs/InputHook";
-import useNotifier from "../../hooks/utils/useNotifier";
+
+/**
+ * Redux
+*/
+import { useRegisterMutation } from "../../store/services/auth/AuthApi";
 
 export default function RegisterPage() {
   useNotifier();
+
+  const [createAccount, { isLoading }] = useRegisterMutation();
 
   const methods = useForm({
     defaultValues: {
@@ -34,7 +41,10 @@ export default function RegisterPage() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    createAccount({
+      body: data,
+      setError: methods.setError,
+    });
   };
 
   return (
@@ -52,6 +62,7 @@ export default function RegisterPage() {
             <InputHook
               name="name"
               label="Nombre"
+              disabled={isLoading}
               fullWidth
               rules={{
                 required: "El nombre es requerido",
@@ -70,6 +81,7 @@ export default function RegisterPage() {
             <InputHook
               name="email"
               label="Correo electrónico"
+              disabled={isLoading}
               fullWidth
               rules={{
                 required: "El correo electrónico es requerido",
@@ -84,6 +96,7 @@ export default function RegisterPage() {
             <InputPasswordHook
               name="password"
               label="Contraseña"
+              disabled={isLoading}
               fullWidth
               rules={{
                 required: "La contraseña es requerida",
@@ -98,6 +111,7 @@ export default function RegisterPage() {
             <InputPasswordHook
               name="password_confirmation"
               label="Confirmar contraseña"
+              disabled={isLoading}
               fullWidth
               rules={{
                 required: "La confirmación de contraseña es requerida",
@@ -107,7 +121,7 @@ export default function RegisterPage() {
             />
           </Grid>
           <Grid size={12}>
-            <Button type="submit" variant="contained" color="primary">
+            <Button loading={isLoading} type="submit" variant="contained" color="primary">
               Registrarse
             </Button>
           </Grid>
