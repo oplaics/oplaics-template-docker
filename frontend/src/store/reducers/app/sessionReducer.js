@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { readStorage, writeLocal } from "../../../components/utils/storage";
+import { readStorage, removeStorage, writeLocal } from "../../../components/utils/storage";
 
 const initialState = {
-  theme: readStorage("userConfig.theme", "light"),
+  auth: false,
+  relogin: true,
+  notifys: 0,
+  apiKey: readStorage('session.apiKey', null),
+  token_can: [],
+  user: {},
+  permissions: [],
+  roles: [],
 };
 
 export const sessionSlice = createSlice({
@@ -12,7 +19,11 @@ export const sessionSlice = createSlice({
     updateSession: (state, action) => {
       const { key, value, notSave } = action.payload;
       state[key] = value;
-      !notSave && localStorage.setItem(`session.${key}`, JSON.stringify(value));
+      !notSave && writeLocal(`session.${key}`, value);
+    },
+    logoutApp: () => {
+      removeStorage('session.apiKey');
+      return {...initialState, relogin: false};
     },
   },
 });
