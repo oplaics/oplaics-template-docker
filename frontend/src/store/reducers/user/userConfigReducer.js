@@ -12,7 +12,7 @@ export const userConfigSlice = createSlice({
     updateUserConfig: (state, action) => {
       const { key, value, notSave } = action.payload;
       state[key] = value;
-      !notSave && localStorage.setItem(`userConfig.${key}`, JSON.stringify(value));
+      !notSave && writeLocal(`userConfig.${key}`, value);
     },
     updateTheme: (state) => {
       const newTheme = state.theme === 'light' ? 'dark' : 'light';
