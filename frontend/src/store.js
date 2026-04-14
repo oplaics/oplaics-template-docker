@@ -11,6 +11,11 @@ import userConfigReducer from "./store/reducers/user/userConfigReducer";
 import notifierReducer from "./store/reducers/app/notifierReducer";
 import sessionReducer from "./store/reducers/app/sessionReducer";
 
+/**
+ * API Services
+ */
+import { authApi } from "./store/services/auth/AuthApi";
+
 const store = configureStore({
   reducer: {
     /**
@@ -23,10 +28,15 @@ const store = configureStore({
      */
     notifier: notifierReducer,
     session: sessionReducer,
+
+    /**
+     * API Services
+     */
+    [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-      // Add the API middlewares
+      authApi.middleware,
     ),
 });
 
