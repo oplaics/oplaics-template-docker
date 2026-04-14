@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 
 /**
- * React Hook Form
+ * RHF
  */
 import useNotifier from "../../hooks/utils/useNotifier";
 import { FormProvider, useForm } from "react-hook-form";
