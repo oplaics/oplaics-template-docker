@@ -33,7 +33,9 @@ export function CheckBoxHook({
             onChange={(e) => {
               onChange(e.target.checked);
             }}
-            inputRef={ref}
+            slotProps={{
+              input: { ref }
+            }}
           />
         }
         label={label}
