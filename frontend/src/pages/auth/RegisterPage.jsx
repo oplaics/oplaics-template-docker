@@ -19,9 +19,19 @@ import { FormProvider, useForm } from "react-hook-form";
 import ContainerUI from "../../components/ui/ContainerUI";
 import { InputPasswordHook } from "../../components/forms/Inputs/InputPasswordHook";
 import { InputHook } from "../../components/forms/Inputs/InputHook";
+import useNotifier from "../../hooks/utils/useNotifier";
 
 export default function RegisterPage() {
-  const methods = useForm();
+  useNotifier();
+
+  const methods = useForm({
+    defaultValues: {
+      name: "Jhon Doe",
+      email: "testing@test.test",
+      password: "password",
+      password_confirmation: "password",
+    },
+  });
 
   const onSubmit = (data) => {
     console.log(data);
@@ -35,6 +45,7 @@ export default function RegisterPage() {
           container
           component="form"
           onSubmit={methods.handleSubmit(onSubmit)}
+          autoComplete="off"
           spacing={2}
         >
           <Grid size={{ xs: 12, md: 6 }}>
@@ -63,7 +74,7 @@ export default function RegisterPage() {
               rules={{
                 required: "El correo electrónico es requerido",
                 pattern: {
-                  value: /^\S+@\S+$/i,
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "El correo electrónico no es válido",
                 },
               }}
