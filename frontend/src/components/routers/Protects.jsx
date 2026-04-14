@@ -42,11 +42,11 @@ export function AuthProtect({ stateNull, children, roles, permission = null }) {
   /**
    * 2FA Required Protection
    */
-  if (token_can.includes('2fa_required') && location.pathname !== '/2fa' && location.pathname !== '/logout') {
-    return <Navigate to={'/2fa'} state={!stateNull && { from: location }} />
+  if (token_can.includes('2fa_required') && location.pathname !== '/auth/2fa' && location.pathname !== '/auth/logout') {
+    return <Navigate to={'/auth/2fa'} state={!stateNull && { from: location }} />
   }
 
-  if (!token_can.includes('2fa_required') && location.pathname === '/2fa') {
+  if (!token_can.includes('2fa_required') && location.pathname === '/auth/2fa') {
     return <Navigate to={'/'} state={null} />
   }
 
