@@ -9,7 +9,7 @@ export default function LoginPage() {
       <br/>
       <NavLink to="/auth/register">Ir a Register</NavLink>
       <br/>
-      <NavLink to="/auth/reset">Reiniciar contraseña</NavLink>
+      <NavLink to="/auth/forgot">Reiniciar contraseña</NavLink>
     </ContainerUI>
   )
 }
