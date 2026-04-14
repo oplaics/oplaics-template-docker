@@ -9,6 +9,7 @@ import userConfigReducer from "./store/reducers/user/userConfigReducer";
  * App Slices
  */
 import notifierReducer from "./store/reducers/app/notifierReducer";
+import sessionReducer from "./store/reducers/app/sessionReducer";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
      * App Slices
      */
     notifier: notifierReducer,
+    session: sessionReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
