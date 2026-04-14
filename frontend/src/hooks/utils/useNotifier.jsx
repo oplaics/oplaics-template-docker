@@ -98,9 +98,7 @@ export default function useNotifier({
       });
     }
 
-    return () => {
-      dispatch(resetNotifier());
-    };
+    dispatch(resetNotifier());
   }, [
     notiKey,
     notiText,
