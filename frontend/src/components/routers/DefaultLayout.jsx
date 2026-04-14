@@ -13,9 +13,14 @@ import { SnackbarProvider } from "notistack";
  */
 import { Provider } from "react-redux";
 import store from "../../store";
+import Relogin from "./Relogin";
 
 function DefaultLayoutWrapper() {
-  return <Outlet />;
+  return (
+    <Relogin>
+      <Outlet />
+    </Relogin>
+  );
 }
 
 export default function DefaultLayout() {
