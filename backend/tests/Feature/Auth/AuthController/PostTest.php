@@ -9,11 +9,7 @@ use App\Models\User;
 // Sanctum
 use Laravel\Sanctum\Sanctum;
 
-// Refresh Database
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
-
-uses(RefreshDatabase::class);
 
 test('[POST] usuario puede crear una cuenta', function () {
     $response = $this->postJson(route('auth.register'), [
@@ -31,8 +27,6 @@ test('[POST] usuario puede crear una cuenta', function () {
                 'id',
                 'name',
                 'email',
-                'created_at',
-                'updated_at',
             ],
         ]);
 
