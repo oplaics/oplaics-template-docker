@@ -74,12 +74,19 @@ class AuthService
 
     public function roles(User $user)
     {
-        if ($user->hasRole('owner')) {
-            $roles = Role::all()->pluck('name')->toArray();
-        } else {
-            $roles = $user->getRoleNames()->toArray();
-        }
+        $labels = [
+            'owner' => 'Propietario',
+            'admin' => 'Administrador',
+            'user'  => 'Usuario',
+        ];
 
-        return $roles;
+        $roleNames = $user->getRoleNames()->toArray();
+
+        return array_map(function ($name) use ($labels) {
+            return [
+                'key' => $name,
+                'label' => $labels[$name] ?? $name,
+            ];
+        }, $roleNames);
     }
 }
