@@ -32,8 +32,14 @@ const AuthLayout = lazy(() => import("./components/routers/AuthLayout"));
 const HomePage = lazy(() => import("./pages/home/HomePage"));
 const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/auth/RegisterPage"));
+const ForgotPage = lazy(() => import("./pages/auth/ForgotPage"));
 const TFAPage = lazy(() => import("./pages/auth/TFAPage"));
 const LogoutPage = lazy(() => import("./pages/auth/LogoutPage"));
+
+/**
+ * Apps Routes
+ */
+// import appRoutes from "./routers/AppExample";
 
 const router = createBrowserRouter([
   /* Branch Auth */
@@ -59,10 +65,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "register",
+        path: "forgot",
         element: (
           <NoSeeAuth>
-            <RegisterPage />
+            <ForgotPage />
           </NoSeeAuth>
         ),
       },
@@ -103,6 +109,7 @@ const router = createBrowserRouter([
           </AuthProtect>
         ),
       },
+      // ...appRoutes,
       {
         path: "*",
         element: <Fallback text="Página no encontrada" homeButton />,
