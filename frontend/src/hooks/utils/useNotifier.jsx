@@ -13,7 +13,7 @@ import CloseButton from "../../components/notiferCustom/CloseButton";
  * Redux
  */
 import { useDispatch, useSelector } from "react-redux";
-import { logoutApp } from "../../store/reducers/app/sessionReducer";
+import { logoutSession } from "../../store/reducers/app/sessionReducer";
 import { resetNotifier } from "../../store/reducers/app/notifierReducer";
 
 export default function useNotifier({
@@ -28,8 +28,10 @@ export default function useNotifier({
 } = {}) {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { notiText, notiStatus, notiVariant, notiKey, notiErrors } =
-    useSelector((state) => state.notistack);
+  const notiText = useSelector((state) => state.notifier.notiText);
+  const notiStatus = useSelector((state) => state.notifier.notiStatus);
+  const notiVariant = useSelector((state) => state.notifier.notiVariant);
+  const notiKey = useSelector((state) => state.notifier.notiKey);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,7 +55,7 @@ export default function useNotifier({
         action: (key) => <CloseButton id={key} />,
       });
 
-      dispatch(logoutApp());
+      dispatch(logoutSession());
     } else if (notiStatus == 403) {
       enqueueSnackbar(message403, {
         variant: "error",
@@ -83,7 +85,7 @@ export default function useNotifier({
         action: (key) => <CloseButton id={key} />,
       });
 
-      dispatch(logoutApp());
+      dispatch(logoutSession());
     } else if (notiStatus == 500) {
       enqueueSnackbar("Error interno en el servidor", {
         variant: "error",
@@ -104,7 +106,6 @@ export default function useNotifier({
     notiText,
     notiStatus,
     notiVariant,
-    notiErrors,
     dispatch,
     enqueueSnackbar,
     messageTo200,
