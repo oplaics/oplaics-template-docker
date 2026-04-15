@@ -11,6 +11,7 @@ import { logout } from "./mutations/logout";
 import { tfa } from "./mutations/tfa";
 import { resendCode2FA } from "./mutations/resendCode2FA";
 import { forgot } from "./mutations/forgot";
+import { changePassword } from "./mutations/changePassword";
 
 
 export const authApi = createApi({
@@ -25,6 +26,7 @@ export const authApi = createApi({
     logout: logout(builder),
     resendCode2FA: resendCode2FA(builder),
     forgot: forgot(builder),
+    changePassword: changePassword(builder),
   }),
 });
 
@@ -36,4 +38,5 @@ export const {
   useTfaMutation,
   useResendCode2FAMutation,
   useForgotMutation,
+  useChangePasswordMutation,
 } = authApi;
