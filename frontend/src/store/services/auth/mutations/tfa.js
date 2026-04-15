@@ -9,7 +9,7 @@ export const tfa = (builder) =>
       method: "POST",
       body,
     }),
-    onQueryStarted: async ({ body }, { queryFulfilled, dispatch }) => {
+    onQueryStarted: async (_, { queryFulfilled, dispatch }) => {
       try {
         const res = await queryFulfilled;
 
