@@ -16,6 +16,7 @@ import { Button, Grid } from "@mui/material";
 /**
  * Components
 */
+import useNotifier from "../../hooks/utils/useNotifier";
 import useTitleHook from "../../hooks/utils/useTitleHook";
 import ContainerUI from "../../components/ui/ContainerUI";
 import { InputHook } from "../../components/forms/Inputs/InputHook";
@@ -23,17 +24,31 @@ import { InputHook } from "../../components/forms/Inputs/InputHook";
 /**
  * Redux
  */
-import { useTfaMutation } from "../../store/services/auth/AuthApi";
+import { useResendCode2FAMutation, useTfaMutation } from "../../store/services/auth/AuthApi";
+import { useSelector } from "react-redux";
 
 export default function TFAPage() {
   useTitleHook('2FA - App');
+  useNotifier();
+
   const [tfa, { isLoading }] = useTfaMutation();
+  const [resendCode2FA, { isLoading: isLoading2FA }] = useResendCode2FAMutation();
+
+  const email = useSelector((state) => state.session.user?.email);
   
   const methods = useForm();
 
   const onSubmit = (data) => {
     tfa({
       body: data
+    });
+  }
+
+  const handleResendCode2FA = () => {
+    resendCode2FA({
+      body: {
+        email
+      }
     });
   }
 
@@ -47,6 +62,7 @@ export default function TFAPage() {
             <InputHook
               name="otp"
               label="Código de autenticación"
+              disabled={isLoading || isLoading2FA}
               rules={{
                 required: "El código de autenticación es requerido",
                 minLength: {
@@ -62,8 +78,13 @@ export default function TFAPage() {
             />
           </Grid>
           <Grid size={12}>
-            <Button type="submit" variant="contained" fullWidth>
+            <Button loading={isLoading || isLoading2FA} type="submit" variant="contained" fullWidth>
               Verificar
+            </Button>
+          </Grid>
+          <Grid size={12}>
+            <Button loading={isLoading || isLoading2FA} variant="outlined" fullWidth onClick={handleResendCode2FA}>
+              Reenviar código de seguridad
             </Button>
           </Grid>
         </Grid>
