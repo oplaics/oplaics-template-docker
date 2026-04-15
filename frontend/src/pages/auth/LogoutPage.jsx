@@ -14,8 +14,10 @@ import useTitleHook from "../../hooks/utils/useTitleHook";
  * Redux
  */
 import { useLogoutMutation } from "../../store/services/auth/AuthApi";
+import useNotifier from "../../hooks/utils/useNotifier";
 
 export default function LogoutPage() {
+  useNotifier();
   useTitleHook('Logout - App');
   const [searchParams] = useSearchParams();  
   const [getLogout] = useLogoutMutation();
