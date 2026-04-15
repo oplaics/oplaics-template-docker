@@ -28,5 +28,6 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useReloginMutation,
-  useLogoutMutation
+  useLogoutMutation,
+  useTfaMutation,
 } = authApi;
