@@ -7,6 +7,7 @@ import { baseQuery } from "../ReduxDefault";
 import { register } from "./mutations/register";
 import { login } from "./mutations/login";
 import { relogin } from "./mutations/relogin";
+import { logout } from "./mutations/logout";
 
 
 export const authApi = createApi({
@@ -17,6 +18,7 @@ export const authApi = createApi({
     register: register(builder),
     login: login(builder),
     relogin: relogin(builder),
+    logout: logout(builder),
   }),
 });
 
@@ -24,4 +26,5 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useReloginMutation,
+  useLogoutMutation
 } = authApi;
