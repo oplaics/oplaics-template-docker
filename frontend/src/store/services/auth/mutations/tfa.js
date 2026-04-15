@@ -24,7 +24,7 @@ export const tfa = (builder) =>
         
         dispatch(updateUserSession({ user, permissions, apiKey, roles, token_can, notifys: unreads }));
         
-        writeStorage("session.apiKey", apiKey, body.remember ?? false);
+        writeStorage("session.apiKey", apiKey, token_can.includes("remember_me") ?? false);
       } catch (err) {
         handleQueryError(err, dispatch);
       }
