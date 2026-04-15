@@ -67,7 +67,7 @@ class SecurityCodeService
     $code = $securityCode->token;
     $expireAt = $securityCode->expire_at->diffForHumans();
     
-    Mail::to($user->email)->queue((new SecurityCodeMail($code, $expireAt)));
+    Mail::to($user->email)->queue((new SecurityCodeMail($code, $expireAt, $user->name)));
   }
 
   public function checkCode(User $user, string $code, string $type): bool
