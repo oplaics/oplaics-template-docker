@@ -8,6 +8,7 @@ import { register } from "./mutations/register";
 import { login } from "./mutations/login";
 import { relogin } from "./mutations/relogin";
 import { logout } from "./mutations/logout";
+import { tfa } from "./mutations/tfa";
 
 
 export const authApi = createApi({
@@ -18,6 +19,7 @@ export const authApi = createApi({
     register: register(builder),
     login: login(builder),
     relogin: relogin(builder),
+    tfa: tfa(builder),
     logout: logout(builder),
   }),
 });
