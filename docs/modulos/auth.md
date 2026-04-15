@@ -16,6 +16,7 @@ Este módulo se encarga de gestionar la autenticación de usuarios y la autoriza
 - **Controlador**: [AuthController](/backend/app/Http/Controllers/Auth/AuthController.php)
 - **Servicio**: [AuthService](/backend/app/Services/Auth/AuthService.php)
 - **Requests**
+  - [CreateAccountRequest](/backend/app/Http/Requests/Auth/CreateAccountRequest.php)
   - [LoginRequest](/backend/app/Http/Requests/Auth/LoginRequest.php)
   - [SendCodeRequest](/backend/app/Http/Requests/Auth/SendCodeRequest.php)
 - **Excepciones**: _N/A_

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\CreateAccountRequest;
 use App\Http\Requests\Auth\Login2FARequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SendCodeRequest;
@@ -17,14 +18,10 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function createAccount(
-        Request $request,
+        CreateAccountRequest $request,
         AuthService $authService
     ): JsonResponse {
-        $validated = $request ->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        $validated = $request->validated();
 
         $user = $authService->createAccount($validated);
 

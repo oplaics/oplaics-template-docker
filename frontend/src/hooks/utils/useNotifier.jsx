@@ -13,7 +13,7 @@ import CloseButton from "../../components/notiferCustom/CloseButton";
  * Redux
  */
 import { useDispatch, useSelector } from "react-redux";
-import { logoutApp } from "../../store/authReducer";
+import { logoutSession } from "../../store/reducers/app/sessionReducer";
 import { resetNotifier } from "../../store/reducers/app/notifierReducer";
 
 export default function useNotifier({
@@ -22,13 +22,16 @@ export default function useNotifier({
   message400 = false,
   message403 = "No tienes permisos para esta acción",
   messageTo404 = true,
-  message404 = 'Ruta URL no encontrada',
+  message404 = "Ruta URL no encontrada",
   messageTo422 = true,
-  message422 = 'Error al verificar los datos',
+  message422 = "Error al verificar los datos",
 } = {}) {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { notiText, notiStatus, notiVariant, notiKey, notiErrors } = useSelector((state) => state.notistack);
+  const notiText = useSelector((state) => state.notifier.notiText);
+  const notiStatus = useSelector((state) => state.notifier.notiStatus);
+  const notiVariant = useSelector((state) => state.notifier.notiVariant);
+  const notiKey = useSelector((state) => state.notifier.notiKey);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,13 +49,13 @@ export default function useNotifier({
           variant: "warning",
           action: (key) => <CloseButton id={key} />,
         });
-    }else if (notiStatus == 401) {
+    } else if (notiStatus == 401) {
       enqueueSnackbar("Sesión expirada", {
         variant: "info",
         action: (key) => <CloseButton id={key} />,
       });
 
-      dispatch(logoutApp());
+      dispatch(logoutSession());
     } else if (notiStatus == 403) {
       enqueueSnackbar(message403, {
         variant: "error",
@@ -71,28 +74,18 @@ export default function useNotifier({
       });
     } else if (notiStatus == 422) {
       if (messageTo422) {
-        const errorMessages = notiErrors && Object.values(notiErrors).flat();
-        if (errorMessages?.length > 0) {
-          errorMessages.forEach((msg) =>
-            enqueueSnackbar(msg, {
-              variant: "error",
-              action: (key) => <CloseButton id={key} />,
-            })
-          );
-        } else {
-          enqueueSnackbar(message422, {
-            variant: "error",
-            action: (key) => <CloseButton id={key} />,
-          });
-        }
+        enqueueSnackbar(message422, {
+          variant: "error",
+          action: (key) => <CloseButton id={key} />,
+        });
       }
-    }else if (notiStatus == 429) {
+    } else if (notiStatus == 429) {
       enqueueSnackbar("Demasiadas peticiones", {
         variant: "info",
         action: (key) => <CloseButton id={key} />,
       });
 
-      dispatch(logoutApp());
+      dispatch(logoutSession());
     } else if (notiStatus == 500) {
       enqueueSnackbar("Error interno en el servidor", {
         variant: "error",
@@ -105,15 +98,12 @@ export default function useNotifier({
       });
     }
 
-    return () => {
-      dispatch(resetNotifier());
-    }
+    dispatch(resetNotifier());
   }, [
     notiKey,
     notiText,
     notiStatus,
     notiVariant,
-    notiErrors,
     dispatch,
     enqueueSnackbar,
     messageTo200,

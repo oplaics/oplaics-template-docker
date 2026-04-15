@@ -18,7 +18,8 @@ class SecurityCodeMail extends Mailable implements ShouldQueue
      */
     public function __construct(
         public string $code,
-        public string $expires
+        public string $expires,
+        public string $name,
     )
     {
         $this->onQueue('emails');
@@ -44,6 +45,7 @@ class SecurityCodeMail extends Mailable implements ShouldQueue
             with: [
                 'code' => $this->code,
                 'expires' => $this->expires,
+                'name' => $this->name,
             ],
         );
     }

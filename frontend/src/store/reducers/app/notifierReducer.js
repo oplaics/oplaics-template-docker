@@ -4,7 +4,6 @@ const initialState = {
   notiText: '',
   notiStatus: '',
   notiVariant: 'success',
-  notiErrors: {},
   notiKey: null,
 };
 
@@ -13,12 +12,11 @@ export const notiferSlices = createSlice({
   initialState,
   reducers: {
     updateNotifer: (state, action) => {
-      const { text, status, errors, variant = 'success' } = action.payload;
+      const { text, status, variant = 'success' } = action.payload;
 
       state.notiText = text;
       state.notiStatus = status;
       state.notiVariant = variant;
-      state.notiErrors = errors;
       state.notiKey = new Date().getTime();
     },
     resetNotifier: () => initialState,
@@ -27,4 +25,4 @@ export const notiferSlices = createSlice({
 
 export default notiferSlices.reducer;
 
-export const { updateNotistack, resetNotistack } = notiferSlices.actions;
+export const { updateNotifer, resetNotifier } = notiferSlices.actions;

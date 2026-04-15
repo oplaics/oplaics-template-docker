@@ -57,7 +57,7 @@ class AuthService
         $code = $securityCode->token;
         $expireAt = $securityCode->expire_at->diffForHumans();
 
-        Mail::to($user->email)->queue((new TfaCodeMail($code, $expireAt)));
+        Mail::to($user->email)->queue((new TfaCodeMail($code, $expireAt, $user->name)));
     }
 
     public function formatPerm(User $user)

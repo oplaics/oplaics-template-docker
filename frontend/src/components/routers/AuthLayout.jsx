@@ -15,7 +15,7 @@ import { Provider } from "react-redux";
 import store from "../../store";
 import Relogin from "./Relogin";
 
-function DefaultLayoutWrapper() {
+function AuthLayoutWrapper() {
   return (
     <Relogin>
       <Outlet />
@@ -23,7 +23,7 @@ function DefaultLayoutWrapper() {
   );
 }
 
-export default function DefaultLayout() {
+export default function AuthLayout() {
   return (
     <Provider store={store}>
       <SnackbarProvider
@@ -33,7 +33,7 @@ export default function DefaultLayout() {
           horizontal: "left",
         }}
       >
-        <DefaultLayoutWrapper />
+        <AuthLayoutWrapper />
       </SnackbarProvider>
     </Provider>
   );
