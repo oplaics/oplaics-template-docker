@@ -60,6 +60,10 @@ export default function LoginPage() {
               fullWidth
               rules={{
                 required: "El correo electrónico es requerido",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "El correo electrónico no es válido",
+                },
               }}
             />
           </Grid>
