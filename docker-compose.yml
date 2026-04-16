@@ -49,13 +49,14 @@ services:
 
   php:
     build: .
-    image: jojo-8.4.1
+    image: jojo-8.4.3
     restart: unless-stopped
     user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     networks:
       - app-network
     volumes:
       - ./backend:/var/www
+      - ./docker/php/conf.d/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     depends_on:
       db:
         condition: service_healthy
@@ -63,13 +64,14 @@ services:
   
   schedule:
     build: .
-    image: jojo-8.4.1
+    image: jojo-8.4.3
     restart: unless-stopped
     user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     networks:
       - app-network
     volumes:
       - ./backend:/var/www
+      - ./docker/php/conf.d/custom.ini:/usr/local/etc/php/conf.d/custom.ini
     depends_on:
       db:
         condition: service_healthy
